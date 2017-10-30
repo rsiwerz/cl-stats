@@ -1,7 +1,28 @@
 ;;;; cl-stats.lisp
+;; Author: Robert Siwerz
 
-(in-package #:cl-stats)
+;; Description: Simple statistic library for common lisp.
+;; Nothing fancy, nor fast. Just gets the job done...
 
+(in-package #:cl-stats
+	    (:use #:cl))
+
+;; Calculates the sample mean from a random variable X
+;; Input:   outcomes - The outcomes of the random variable
+;;
+;; Output   The sample mean of the outcomes
+(defun sample-mean (outcomes)
+  (/ (apply #'+ outcomes) (length outcomes)))
+
+
+;; Calculates the sample variance from a random variable X
+;; Input:   outcomes - The outcomes of the random variable
+;;
+;; Output   The sample variance from a set of outcomes of a random variable
+(defun sample-variance (outcomes)
+  (let ((m (mean outcomes)))
+    (/ (apply #'+ (mapcar (lambda (x) (expt (- x m) 2)) outcomes))
+       (- (length outcomes) 1))))
 
 
 ;; Simple bernoulli distribution function.
@@ -18,7 +39,7 @@
 ;; of k successes in N trials.
 ;;
 ;; Example: Probability of getting 4 sixes with a die in
-;; a total of10 trials
+;; a total of 10 trials
 ;;
 ;; Input:   k - number of sucesses
 ;;          N - total amount of trials
@@ -27,6 +48,7 @@
 ;; Output:  Probability of getting k successes in N trials
 (defun binomial-dist (k N p)
   (* (bin-coeff N k) (* (expt p k) (expt (- 1 p) (- N k)))))
+
 
 ;; Calculates the binomial coefficent e.g. #of ways of choosing
 ;; k objects out of a total of N possible

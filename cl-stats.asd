@@ -3,7 +3,7 @@
 (asdf:defsystem #:cl-stats
   :description "A very simple library for statistical learning"
   :author "Robert Siwerz <rsiwerz@kth.se>"
-  :license "Specify license here"
+  :license "BSD"
   :serial t
   :components ((:file "package")
                (:file "cl-stats")))
