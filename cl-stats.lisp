@@ -20,9 +20,21 @@
 ;;
 ;; Output   The sample variance from a set of outcomes of a random variable
 (defun sample-variance (outcomes)
-  (let ((m (mean outcomes)))
+  (let ((m (sample-mean outcomes)))
     (/ (apply #'+ (mapcar (lambda (x) (expt (- x m) 2)) outcomes))
        (- (length outcomes) 1))))
+
+;; Calculates the covariance of two random variables
+;; Input:   X - random variable
+;;          Y - random variable
+;; 
+;; Output: The covariance of two random variables
+(defun sample-covariance (X Y)
+  (let* ((xm (sample-mean X))
+	(ym (sample-mean Y))
+	(xvar (mapcar (lambda (a) (- a xm)) X))
+	(yvar (mapcar (lambda (b) (- b ym)) Y)))
+    (apply #'+ (mapcar #'* xvar yvar))))
 
 
 ;; Simple bernoulli distribution function.
