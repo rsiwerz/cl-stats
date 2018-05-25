@@ -4,8 +4,7 @@
 ;; Description: Simple statistic library for common lisp.
 ;; Nothing fancy, nor fast. Just gets the job done...
 
-(in-package #:cl-stats
-	    (:use #:cl))
+(in-package #:cl-stats)
 
 ;; Calculates the sample mean from a random variable X
 ;; Input:   outcomes - The outcomes of the random variable
